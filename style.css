@@ -351,12 +351,32 @@ body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;color:#1a
   .nav-cta{gap:0}
   .steps{flex-direction:column;align-items:center;gap:32px}
   .step-arr{display:none}
-  .domain-bar{border-radius:16px;flex-wrap:wrap;padding:12px 14px;gap:10px}
+  .domain-bar{border-radius:16px;flex-wrap:wrap;padding:12px 14px;gap:10px;width:calc(100vw - 48px)}
   .domain-bar input{width:100%}
   .btn-analyse{width:100%;justify-content:center;border-radius:12px}
 }
 @media(max-width:480px){
-  .brand-row{gap:18px 28px}
-  .ex-chips{gap:6px}
+  /* Hero — fully centred, no overflow */
+  .hero{padding-left:20px;padding-right:20px;overflow-x:hidden;align-items:center;text-align:center}
+  .hero-title{font-size:clamp(30px,8vw,44px);padding:0 8px;word-break:break-word}
+  .hero-sub{font-size:14px;padding:0 8px}
+  .hero-badge{font-size:12px;padding:6px 14px 6px 8px;max-width:90vw;white-space:normal;text-align:center}
+
+  /* Shrink orbs so they don't push content off-screen */
+  .orb-1{width:220px;height:110px;top:-20px;left:-30px}
+  .orb-2{width:200px;height:100px;top:-10px;right:-30px}
+  .orb-3{width:180px;height:90px;top:40px;left:15%}
+
+  /* Input bar */
+  .domain-bar{width:calc(100vw - 40px);border-radius:14px}
+
+  /* Chips */
+  .brand-row{gap:14px 20px}
+  .ex-chips{gap:6px;padding:0 4px}
   .ex-chip{padding:6px 10px;font-size:12px}
+
+  /* Sections */
+  .hiw{padding:60px 20px}
+  .local{padding:48px 20px}
+  .footer-cta{padding:60px 20px 48px}
 }
