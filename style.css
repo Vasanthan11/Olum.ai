@@ -52,23 +52,44 @@ body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;color:#1a
 ══════════════════════════════════════════════════════ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:300;height:60px;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,0,0,.06);
+  background:transparent;
+  border-bottom:1px solid transparent;
   display:flex;align-items:center;padding:0 36px;gap:28px;
-  transition:box-shadow .3s;
+  transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
 }
-.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.10)}
-.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:#111;font-size:18px;font-weight:700;letter-spacing:-.02em;flex-shrink:0}
+/* On scroll — fills in with white glass */
+.nav.scrolled{
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  box-shadow:0 2px 20px rgba(0,0,0,.08);
+}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:#111;font-size:18px;font-weight:700;letter-spacing:-.02em;flex-shrink:0;transition:color .35s}
 .nav-links{flex:1;display:flex;align-items:center;justify-content:center;gap:28px}
-.nav-links a{font-size:14px;font-weight:500;color:#555;text-decoration:none;transition:color .15s;position:relative}
+.nav-links a{font-size:14px;font-weight:500;color:#333;text-decoration:none;transition:color .25s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#4B6CF5;border-radius:2px;transition:width .25s}
 .nav-links a:hover{color:#111}
 .nav-links a:hover::after{width:100%}
 .nav-cta{display:flex;align-items:center;gap:8px;margin-left:auto}
-.btn-login{font-size:14px;font-weight:500;color:#555;background:none;border:none;cursor:pointer;padding:8px 14px;font-family:inherit;border-radius:999px;transition:color .15s}
-.btn-login:hover{color:#111}
-.btn-signup{font-size:13.5px;font-weight:600;color:#fff;background:#111;border:none;cursor:pointer;padding:9px 20px;border-radius:999px;font-family:inherit;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s}
-.btn-signup:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.btn-login{font-size:14px;font-weight:500;color:#444;background:none;border:none;cursor:pointer;padding:8px 14px;font-family:inherit;border-radius:999px;transition:color .25s,background .25s}
+.btn-login:hover{color:#111;background:rgba(255,255,255,.25)}
+
+/* Scrolled state — Log in becomes clearly dark */
+.nav.scrolled .btn-login{color:#555}
+.nav.scrolled .btn-login:hover{color:#111;background:rgba(0,0,0,.04)}
+.nav.scrolled .nav-links a{color:#555}
+.nav.scrolled .nav-links a:hover{color:#111}
+.nav.scrolled .nav-brand{color:#111}
+
+/* Sign up pill */
+.btn-signup{
+  font-size:13.5px;font-weight:600;color:#fff;
+  background:#111;border:1px solid transparent;
+  cursor:pointer;padding:9px 20px;border-radius:999px;
+  font-family:inherit;white-space:nowrap;
+  transition:background .2s,transform .15s,box-shadow .15s,border-color .3s;
+}
+.btn-signup:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.22)}
 
 /* Hamburger */
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px}
@@ -112,7 +133,6 @@ body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;color:#1a
     transform:translateX(3%);
   }
 }
-
 /* Gradient overlay for readability — light at bottom, semi-transparent at top */
 .hero-overlay-gradient{
   position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -365,33 +385,176 @@ body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;color:#1a
 .lfeat{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#333;font-weight:500}
 .lcheck{width:18px;height:18px;border-radius:50%;background:#4B6CF5;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
+/* ── Google Maps-style card (matches Image 1) ── */
 .local-map{}
-.map-card{position:relative;border-radius:16px;overflow:hidden;border:1px solid #dde2e8;box-shadow:0 4px 20px rgba(0,0,0,.1);background:#fff}
-.map-canvas{
-  height:220px;width:100%;
-  background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.35) 0,rgba(255,255,255,.35) 1px,transparent 1px,transparent 40px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0,rgba(255,255,255,.35) 1px,transparent 1px,transparent 40px),
-    linear-gradient(158deg,#d4e8b0 0%,#c8dc9c 40%,#b8cc88 70%,#e8f0d8 100%);
+
+.map-card{
+  position:relative;border-radius:20px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
+  background:#e8edd6;
+  border:1px solid rgba(255,255,255,.6);
 }
-.map-road-h{position:absolute;top:45%;left:0;right:0;height:10px;background:rgba(255,255,255,.75)}
-.map-road-v{position:absolute;top:0;bottom:0;left:42%;width:10px;background:rgba(255,255,255,.75)}
-.map-pin-green{position:absolute;top:28%;left:54%;width:10px;height:10px;border-radius:50%;background:#2db14a;border:2px solid #fff;box-shadow:0 2px 6px rgba(45,177,74,.4)}
-.map-pin-wrap{position:absolute;top:36%;left:39%;display:flex;flex-direction:column;align-items:center;animation:pinBounce 2.2s ease-in-out infinite}
-@keyframes pinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.map-pin-circle{width:14px;height:14px;border-radius:50%;background:#e53935;border:2px solid #fff;box-shadow:0 2px 8px rgba(229,57,53,.45)}
-.map-biz-card{padding:14px 16px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.map-biz-left{flex:1;min-width:0}
-.map-biz-name{font-size:14px;font-weight:700;color:#111}
-.map-biz-stars{display:flex;align-items:center;gap:5px;margin:3px 0}
-.star-val{font-size:12px;font-weight:700;color:#333}
-.stars{font-size:12px;color:#f59e0b;letter-spacing:1px}
-.star-count{font-size:11px;color:#888}
-.map-biz-sub{font-size:11px;color:#888;margin-bottom:3px}
-.map-biz-dist{font-size:11px;color:#666;display:flex;align-items:center;gap:4px}
-.map-dir{background:#4B6CF5;color:#fff;border:none;border-radius:8px;padding:8px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:background .15s,transform .15s}
-.map-dir:hover{background:#3a5ce0;transform:translateY(-1px)}
-.map-close-btn{position:absolute;top:8px;right:10px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.9);border:1px solid #eee;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:#666;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* Real Google Maps tile texture */
+.map-canvas{
+  height:210px;width:100%;position:relative;overflow:hidden;
+  background:
+    /* roads */
+    repeating-linear-gradient(0deg,   rgba(255,255,255,.55) 0px, rgba(255,255,255,.55) 2px, transparent 2px, transparent 48px),
+    repeating-linear-gradient(90deg,  rgba(255,255,255,.55) 0px, rgba(255,255,255,.55) 2px, transparent 2px, transparent 48px),
+    /* diagonal roads */
+    repeating-linear-gradient(38deg,  rgba(255,255,255,.30) 0px, rgba(255,255,255,.30) 1.5px, transparent 1.5px, transparent 72px),
+    /* water body top-left */
+    radial-gradient(ellipse 60px 40px at 15% 30%, #b4cce8 0%, transparent 100%),
+    /* park blobs */
+    radial-gradient(ellipse 50px 35px at 72% 22%, #c6dfa0 0%, transparent 100%),
+    radial-gradient(ellipse 38px 26px at 30% 65%, #c9e0a6 0%, transparent 100%),
+    /* base land */
+    linear-gradient(160deg, #dde8c2 0%, #d4e0b8 35%, #cdd9af 60%, #d8e4be 100%);
+}
+
+/* Wider main road (horizontal) */
+.map-road-h{
+  position:absolute;top:44%;left:0;right:0;height:13px;
+  background:rgba(255,255,255,.82);
+  box-shadow:0 1px 0 rgba(200,210,180,.6), 0 -1px 0 rgba(200,210,180,.6);
+}
+/* Wider main road (vertical) */
+.map-road-v{
+  position:absolute;top:0;bottom:0;left:44%;width:13px;
+  background:rgba(255,255,255,.82);
+  box-shadow:1px 0 0 rgba(200,210,180,.6), -1px 0 0 rgba(200,210,180,.6);
+}
+/* Yellow diagonal road */
+.map-road-diag{
+  position:absolute;top:0;left:52%;width:9px;height:100%;
+  background:rgba(255,255,255,.55);
+  transform:rotate(22deg) translateX(20px);
+  transform-origin:top left;
+}
+
+/* Green Ubisoft-style pin (competitor) — matches Image 1 */
+.map-pin-green{
+  position:absolute;top:18%;left:28%;
+  width:0;height:0;
+  filter:drop-shadow(0 3px 6px rgba(0,140,60,.45));
+  animation:pinFloatGreen 2.8s ease-in-out .5s infinite;
+}
+.map-pin-green::before{
+  content:'';
+  position:absolute;
+  left:-13px;top:-28px;
+  width:26px;height:34px;
+  background:#1db954;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  border:2px solid #fff;
+  clip-path:polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.map-pin-green::after{
+  content:'';
+  position:absolute;
+  left:-5px;top:-20px;
+  width:10px;height:10px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.9;
+}
+@keyframes pinFloatGreen{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* Red Google-style teardrop pin (your business) — matches Image 1 */
+.map-pin-wrap{
+  position:absolute;top:28%;left:60%;
+  display:flex;flex-direction:column;align-items:center;
+  animation:pinBounce 2.2s ease-in-out infinite;
+  filter:drop-shadow(0 4px 8px rgba(220,50,30,.45));
+}
+@keyframes pinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* Teardrop shape */
+.map-pin-circle{
+  width:28px;height:36px;
+  background:#e53935;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  clip-path:polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
+  border:2.5px solid #fff;
+  position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+/* White circle inside red pin */
+.map-pin-circle::after{
+  content:'';position:absolute;
+  width:10px;height:10px;
+  background:#fff;border-radius:50%;
+  top:7px;left:50%;transform:translateX(-50%);
+}
+
+/* Ripple on the red pin */
+.map-pin-ripple{
+  position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+  width:28px;height:10px;
+  background:rgba(229,57,53,.25);
+  border-radius:50%;
+  filter:blur(3px);
+  animation:rippleShadow 2.2s ease-in-out infinite;
+}
+@keyframes rippleShadow{0%,100%{transform:translateX(-50%) scaleX(1);opacity:.3}50%{transform:translateX(-50%) scaleX(.6);opacity:.1}}
+
+/* ── Business info card at bottom ── matches Image 1 exactly */
+.map-biz-card{
+  background:#fff;
+  padding:16px 18px 14px;
+  border-top:none;
+  display:flex;flex-direction:column;gap:0;
+}
+
+/* Row 1: Name + tools icon */
+.map-biz-row1{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.map-biz-name{font-size:16px;font-weight:700;color:#1a1a1a;letter-spacing:-.01em}
+.map-biz-tools{
+  color:#777;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  background:transparent;border:none;cursor:pointer;
+  transition:background .2s;
+}
+.map-biz-tools:hover{background:#f5f5f5}
+
+/* Row 2: Stars */
+.map-biz-stars{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+.star-val{font-size:13px;font-weight:600;color:#1a1a1a}
+.stars{font-size:14px;color:#f5a623;letter-spacing:0px}
+.star-count{font-size:12.5px;color:#666}
+
+/* Row 3: Category */
+.map-biz-sub{font-size:12.5px;color:#555;margin-bottom:12px}
+
+/* Row 4: Buttons */
+.map-biz-btns{display:flex;gap:10px}
+.map-btn-route{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
+  background:#f1f3f4;border:1px solid #e0e0e0;border-radius:24px;
+  padding:9px 14px;font-size:12.5px;font-weight:500;color:#444;
+  cursor:pointer;font-family:inherit;transition:background .15s;
+}
+.map-btn-route:hover{background:#e8eaed}
+.map-dir{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:#1a73e8;color:#fff;border:none;border-radius:24px;
+  padding:9px 14px;font-size:12.5px;font-weight:600;
+  cursor:pointer;font-family:inherit;
+  transition:background .15s,transform .15s,box-shadow .15s;
+}
+.map-dir:hover{background:#1558b0;transform:translateY(-1px);box-shadow:0 3px 10px rgba(26,115,232,.35)}
+
+.map-close-btn{
+  position:absolute;top:10px;right:12px;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.1);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:#555;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);transition:background .15s;
+}
+.map-close-btn:hover{background:#fff}
 
 .local-actions{}
 .actions-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:18px 20px;box-shadow:0 4px 18px rgba(0,0,0,.07)}

@@ -26,10 +26,10 @@
     Olum
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="#">How it works</a>
-    <a href="#">For Local Businesses</a>
-    <a href="#">Pricing</a>
-    <a href="#">Resources</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#local">For Local Businesses</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#creates">Resources</a>
   </div>
   <div class="nav-cta">
     <button class="btn-login">Log in</button>
@@ -38,10 +38,10 @@
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#">How it works</a>
-  <a href="#">For Local Businesses</a>
-  <a href="#">Pricing</a>
-  <a href="#">Resources</a>
+  <a href="#how-it-works">How it works</a>
+  <a href="#local">For Local Businesses</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#creates">Resources</a>
   <div class="mobile-cta">
     <button class="btn-login">Log in</button>
     <button class="btn-signup">Sign up</button>
@@ -125,7 +125,7 @@
 </section>
 
 <!-- ══ WHAT OLUM CREATES ══ -->
-<section class="section-creates">
+<section class="section-creates" id="creates">
 <div class="creates">
   <div class="reveal-left">
     <div class="section-label"><svg width="10" height="10" viewBox="0 0 24 24" fill="#4B6CF5"><circle cx="12" cy="12" r="10"/></svg>What Olum Creates</div>
@@ -156,7 +156,7 @@
 </section>
 
 <!-- ══ HOW IT WORKS — redesigned like Image 3 ══ -->
-<section class="hiw">
+<section class="hiw" id="how-it-works">
   <div class="section-label reveal-up">HOW IT WORKS</div>
   <h2 class="reveal-up" style="--d:.08s">Real data in. Ready content out.</h2>
 
@@ -319,7 +319,7 @@
 </section>
 
 <!-- ══ LOCAL ══ -->
-<section class="local">
+<section class="local" id="local">
 <div class="local-inner">
 
   <div class="local-left reveal-left">
@@ -342,30 +342,61 @@
 
   <div class="local-map reveal-up" style="--d:.1s">
     <div class="map-card">
-      <div class="map-canvas"></div>
-      <div class="map-road-h"></div>
-      <div class="map-road-v"></div>
-      <div class="map-pin-green"></div>
-      <div class="map-pin-wrap"><div class="map-pin-circle"></div></div>
-      <div class="map-biz-card">
-        <div class="map-biz-left">
-          <div class="map-biz-name">Your Business</div>
-          <div class="map-biz-stars">
-            <span class="star-val">4.8</span>
-            <span class="stars">★★★★★</span>
-            <span class="star-count">(215)</span>
-          </div>
-          <div class="map-biz-sub">Dental Clinic · Austin, TX</div>
-          <div class="map-biz-dist">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            42 min
-          </div>
+      <!-- Map tile area -->
+      <div class="map-canvas">
+        <div class="map-road-h"></div>
+        <div class="map-road-v"></div>
+        <div class="map-road-diag"></div>
+
+        <!-- Green teardrop pin (competitor) — Image 1 style -->
+        <div class="map-pin-green"></div>
+
+        <!-- Red teardrop pin (your business) — Image 1 style -->
+        <div class="map-pin-wrap">
+          <div class="map-pin-circle"></div>
+          <div class="map-pin-ripple"></div>
         </div>
-        <button class="map-dir">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="#fff"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-          Directions
-        </button>
       </div>
+
+      <!-- Business info card — matches Image 1 exactly -->
+      <div class="map-biz-card">
+        <!-- Row 1: Name + tools icon -->
+        <div class="map-biz-row1">
+          <div class="map-biz-name">Your Business</div>
+          <button class="map-biz-tools" aria-label="More options">
+            <!-- Scissors / tools icon like Image 1 -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+              <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+              <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+              <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Row 2: Stars -->
+        <div class="map-biz-stars">
+          <span class="star-val">4.8</span>
+          <span class="stars">★★★★★</span>
+          <span class="star-count">(215)</span>
+        </div>
+
+        <!-- Row 3: Category -->
+        <div class="map-biz-sub">Dental Clinic · Austin, TX</div>
+
+        <!-- Row 4: Action buttons -->
+        <div class="map-biz-btns">
+          <button class="map-btn-route">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            42 min
+          </button>
+          <button class="map-dir">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Directions
+          </button>
+        </div>
+      </div>
+
       <button class="map-close-btn">✕</button>
     </div>
   </div>
